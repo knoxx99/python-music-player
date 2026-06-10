@@ -1,22 +1,23 @@
 import os
 os.environ["PYGAME_HIDE_SUPPORT_PROMPT"] = "hide"
 import pygame
-import pygame
+def load_music(folder,song_name):
+    file_path = os.path.join(folder,song_name)
+    pygame.mixer.music.load(file_path)
+    pygame.mixer.music.play()
 
-def play_music(folder,song_num):
-    file_path = os.path.join(folder,song_num)
+def play_music(folder,song_name,song_list,song_num):
+    file_path = os.path.join(folder,song_name)
 
     if not os.path.exists(file_path):
         print("File not found!")
         return
-    pygame.mixer.music.load(file_path)
-    pygame.mixer.music.play()
-
-    print(f"Now playing {song_num}")
-    print("commands: [P]ause, [R]esume, [S]top")
+    load_music(folder, song_name)
+    print(f"Now playing {song_name}")
+    print("commands: [P]ause, [R]esume, [S]top, [N]ext, [B]ack")
 
     while True:
-        command = input ("> ").upper()
+        command = input ("> ").strip().upper()
         if command == "P":
             pygame.mixer.music.pause()
             print("paused")
@@ -27,6 +28,14 @@ def play_music(folder,song_num):
             pygame.mixer.music.stop()
             print("stopped")
             return
+        elif command == "N":
+            song_num = (song_num + 1) % len(song_list)
+            load_music(folder,song_list[song_num])
+            print(f"Now playing {song_list[song_num]}")
+        elif command == "B":
+            song_num = (song_num - 1) % len(song_list)
+            load_music(folder, song_list[song_num])
+            print(f"Now playing {song_list[song_num]}")
         else :
             print("Invalid command!")
 
@@ -43,7 +52,6 @@ def main():
     mp3_files =sorted(
         [file for file in os.listdir(folder) if file.endswith(".mp3")]
     )
-    print(mp3_files)
     if not mp3_files:
         print("No mp3 files found.")
         return
@@ -64,7 +72,7 @@ def main():
             continue
         choice = int(choice_input) - 1
         if 0 <= choice < len(mp3_files):
-            play_music(folder, mp3_files[choice])
+            play_music(folder, mp3_files[choice],mp3_files,choice)
         else:
             print("Invalid choice!")
 
