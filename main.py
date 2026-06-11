@@ -8,13 +8,14 @@ def load_music(folder,song_name):
 
 def play_music(folder,song_name,song_list,song_num):
     file_path = os.path.join(folder,song_name)
+    current_volume = pygame.mixer.music.get_volume()
 
     if not os.path.exists(file_path):
         print("File not found!")
         return
     load_music(folder, song_name)
     print(f"Now playing {song_name}")
-    print("commands: [P]ause, [R]esume, [S]top, [N]ext, [B]ack")
+    print("commands: [P]ause, [R]esume, [S]top, [N]ext, [B]ack, [+]Volume, [-]Volume")
 
     while True:
         command = input ("> ").strip().upper()
@@ -36,6 +37,15 @@ def play_music(folder,song_name,song_list,song_num):
             song_num = (song_num - 1) % len(song_list)
             load_music(folder, song_list[song_num])
             print(f"Now playing {song_list[song_num]}")
+        elif command == "+":
+            current_volume = min(1.0, current_volume + 0.2)
+            pygame.mixer.music.set_volume(current_volume)
+            print(f"Volume: {current_volume:.1f}")
+        elif command == "-":
+            current_volume = max(0.0, current_volume - 0.2)
+            pygame.mixer.music.set_volume(current_volume)
+            print(f"Volume: {current_volume:.1f}")
+
         else :
             print("Invalid command!")
 
