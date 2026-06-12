@@ -1,6 +1,7 @@
 import os
 os.environ["PYGAME_HIDE_SUPPORT_PROMPT"] = "hide"
 import pygame
+import random
 def load_music(folder,song_name):
     file_path = os.path.join(folder,song_name)
     pygame.mixer.music.load(file_path)
@@ -8,20 +9,21 @@ def load_music(folder,song_name):
 
 def play_music(folder,song_name,song_list,song_num):
     file_path = os.path.join(folder,song_name)
-    current_volume = pygame.mixer.music.get_volume()
-
+    current_volume = 0.5
+    pygame.mixer.music.set_volume(current_volume)
     if not os.path.exists(file_path):
         print("File not found!")
         return
     load_music(folder, song_name)
     print(f"Now playing {song_name}")
-    print("commands: [P]ause, [R]esume, [S]top, [N]ext, [B]ack, [+]Volume, [-]Volume")
+    print("commands: [P]ause, [R]esume, [S]top, [N]ext, [B]ack, [+]Volume, [-]Volume, [H]suffle")
 
     while True:
         command = input ("> ").strip().upper()
         if command == "P":
             pygame.mixer.music.pause()
             print("paused")
+
         elif command == "R":
             pygame.mixer.music.unpause()
             print("unpaused")
@@ -45,7 +47,19 @@ def play_music(folder,song_name,song_list,song_num):
             current_volume = max(0.0, current_volume - 0.2)
             pygame.mixer.music.set_volume(current_volume)
             print(f"Volume: {current_volume:.1f}")
+        elif command == "H":
+            if len(song_list) == 1:
+                print("Only one song available")
+                continue
+            new_song = random.randint(0, len(song_list) - 1)
 
+            while new_song == song_num:
+                new_song = random.randint(0, len(song_list) - 1)
+
+            song_num = new_song
+            load_music(folder, song_list[song_num])
+
+            print(f"Now playing {song_list[song_num]}")
         else :
             print("Invalid command!")
 
