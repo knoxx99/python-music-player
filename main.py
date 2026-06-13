@@ -10,13 +10,14 @@ def load_music(folder,song_name):
 def play_music(folder,song_name,song_list,song_num):
     file_path = os.path.join(folder,song_name)
     current_volume = 0.5
+    history = [song_name]
     pygame.mixer.music.set_volume(current_volume)
     if not os.path.exists(file_path):
         print("File not found!")
         return
     load_music(folder, song_name)
     print(f"Now playing {song_name}")
-    print("commands: [P]ause, [R]esume, [S]top, [N]ext, [B]ack, [+]Volume, [-]Volume, [H]suffle")
+    print("commands: [P]ause, [R]esume, [S]top, [N]ext, [B]ack, [+]Volume, [-]Volume, [H]suffle, [L] List Recently Played Songs")
 
     while True:
         command = input ("> ").strip().upper()
@@ -33,10 +34,12 @@ def play_music(folder,song_name,song_list,song_num):
             return
         elif command == "N":
             song_num = (song_num + 1) % len(song_list)
+            history.append(song_list[song_num])
             load_music(folder,song_list[song_num])
             print(f"Now playing {song_list[song_num]}")
         elif command == "B":
             song_num = (song_num - 1) % len(song_list)
+            history.append(song_list[song_num])
             load_music(folder, song_list[song_num])
             print(f"Now playing {song_list[song_num]}")
         elif command == "+":
@@ -57,9 +60,14 @@ def play_music(folder,song_name,song_list,song_num):
                 new_song = random.randint(0, len(song_list) - 1)
 
             song_num = new_song
+            history.append(song_list[song_num])
             load_music(folder, song_list[song_num])
 
             print(f"Now playing {song_list[song_num]}")
+        elif command == "L":
+            print("\nRecently Played:")
+            for i, song in enumerate(history[-5:], start=1):
+                print(f"{i}. {song}")
         else :
             print("Invalid command!")
 
