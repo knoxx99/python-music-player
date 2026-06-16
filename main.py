@@ -17,7 +17,7 @@ def play_music(folder,song_name,song_list,song_num):
         return
     load_music(folder, song_name)
     print(f"Now playing {song_name}")
-    print("commands: [P]ause, [R]esume, [S]top, [N]ext, [B]ack, [+]Volume, [-]Volume, [H]suffle, [L] List Recently Played Songs")
+    print("commands: [P]ause, [R]esume, [S]top, [N]ext, [B]ack, [+]Volume, [-]Volume, [H]suffle, [L] List Recently Played Songs, [F]ind song")
 
     while True:
         command = input ("> ").strip().upper()
@@ -68,6 +68,36 @@ def play_music(folder,song_name,song_list,song_num):
             print("\nRecently Played:")
             for i, song in enumerate(history[-5:], start=1):
                 print(f"{i}. {song}")
+        elif command == "F":
+            search = input("Enter song name: ").strip().lower()
+
+            matches = []
+
+        for i, song in enumerate(song_list):
+            if search in song.lower():
+                matches.append((i, song))
+
+        if not matches:
+            print("No matching songs found.")
+            continue
+
+        print("\nSearch Results:")
+        for num, (_, song) in enumerate(matches, start=1):
+            print(f"{num}. {song}")
+
+        choice = input("\nPlay a song? Enter number (or press Enter to cancel): ")
+
+        if choice.isdigit():
+            choice = int(choice)
+
+            if 1 <= choice <= len(matches):
+                song_num = matches[choice - 1][0]
+
+                history.append(song_list[song_num])
+
+                load_music(folder, song_list[song_num])
+
+                print(f"Now playing {song_list[song_num]}")
         else :
             print("Invalid command!")
 
