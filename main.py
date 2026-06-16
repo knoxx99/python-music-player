@@ -7,6 +7,7 @@ def load_music(folder,song_name):
     pygame.mixer.music.load(file_path)
     pygame.mixer.music.play()
 
+
 def play_music(folder,song_name,song_list,song_num):
     file_path = os.path.join(folder,song_name)
     current_volume = 0.5
