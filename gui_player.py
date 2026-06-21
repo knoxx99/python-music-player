@@ -15,7 +15,7 @@ root.resizable(False, False)
 
 # Current song label
 current_song = tk.StringVar()
-current_song.set("No song selected")
+current_song.set("🎵 No song selected")
 
 song_label = tk.Label(
     root,
@@ -26,18 +26,18 @@ song_label = tk.Label(
 )
 song_label.pack(pady=10)
 
-
-
-# Song list
 # Song list
 song_list = tk.Listbox(
     root,
     width=60,
     height=15,
+    font=("Arial", 11),
     bg="#2D2D2D",
     fg="white",
     selectbackground="#007ACC",
-    selectforeground="white"
+    selectforeground="white",
+    relief="flat",
+    borderwidth=0
 )
 
 songs = []
@@ -61,6 +61,9 @@ total_label = tk.Label(
 total_label.pack()
 
 song_list.pack(pady=10)
+if songs:
+    song_list.selection_set(0)
+    song_list.activate(0)
 
 def play_song():
     if not song_list.curselection():
@@ -131,17 +134,24 @@ def next_song():
 
 def shuffle_song():
 
-    if not songs:
+    if len(songs) <= 1:
         return
 
-    index = random.randint(0, len(songs)-1)
+    current = song_list.curselection()[0] if song_list.curselection() else -1
+
+    index = random.randint(0, len(songs) - 1)
+
+    while index == current:
+        index = random.randint(0, len(songs) - 1)
 
     song_list.selection_clear(0, tk.END)
     song_list.selection_set(index)
     song_list.activate(index)
 
     play_song()
-song_list.bind("<Double-Button-1>", lambda event: play_song())
+    song_list.bind("<Double-Button-1>", lambda event: play_song())
+
+
 # Buttons Frame
 button_frame = tk.Frame(root, bg="#1E1E1E")
 button_frame.pack(pady=10)
