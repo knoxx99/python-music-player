@@ -26,6 +26,24 @@ song_label = tk.Label(
 )
 song_label.pack(pady=10)
 
+search_frame = tk.Frame(root, bg="#1E1E1E")
+search_frame.pack(pady=5)
+
+search_label = tk.Label(
+    search_frame,
+    text="🔍 Search:",
+    bg="#1E1E1E",
+    fg="white"
+)
+search_label.pack(side=tk.LEFT, padx=5)
+
+search_entry = tk.Entry(
+    search_frame,
+    width=40,
+    font=("Arial", 11)
+)
+search_entry.pack(side=tk.LEFT)
+
 # Song list
 song_list = tk.Listbox(
     root,
@@ -151,7 +169,20 @@ def shuffle_song():
     play_song()
     song_list.bind("<Double-Button-1>", lambda event: play_song())
 
+def search_song(event=None):
+    keyword = search_entry.get().strip().lower()
 
+    song_list.delete(0, tk.END)
+
+    if keyword == "":
+        for song in songs:
+            song_list.insert(tk.END, song)
+        return
+
+    for song in songs:
+        if keyword in song.lower():
+            song_list.insert(tk.END, song)
+search_entry.bind("<KeyRelease>", search_song)
 # Buttons Frame
 button_frame = tk.Frame(root, bg="#1E1E1E")
 button_frame.pack(pady=10)
