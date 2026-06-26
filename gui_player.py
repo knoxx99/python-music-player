@@ -1,4 +1,5 @@
 import tkinter as tk
+from tkinter import filedialog
 import pygame
 import os
 import random
@@ -167,7 +168,6 @@ def shuffle_song():
     song_list.activate(index)
 
     play_song()
-    song_list.bind("<Double-Button-1>", lambda event: play_song())
 
 def search_song(event=None):
     keyword = search_entry.get().strip().lower()
@@ -183,6 +183,54 @@ def search_song(event=None):
         if keyword in song.lower():
             song_list.insert(tk.END, song)
 search_entry.bind("<KeyRelease>", search_song)
+
+def open_folder():
+    global MUSIC_FOLDER, songs
+
+    folder = filedialog.askdirectory(title="Select Music Folder")
+
+    if not folder:
+        return
+
+    MUSIC_FOLDER = folder
+
+    songs = [
+        file for file in os.listdir(MUSIC_FOLDER)
+        if file.endswith(".mp3")
+    ]
+
+    song_list.delete(0, tk.END)
+
+    for song in songs:
+        song_list.insert(tk.END, song)
+
+    total_label.config(text=f"Total Songs: {len(songs)}")
+
+    if songs:
+        current_song.set("🎵 Folder Loaded Successfully")
+        song_list.selection_set(0)
+        song_list.activate(0)
+    else:
+        current_song.set("❌ No MP3 files found")
+
+    if songs:
+        song_list.selection_set(0)
+        song_list.activate(0)
+
+folder_btn = tk.Button(
+    root,
+    text="📂 Open Folder",
+    command=open_folder,
+    bg="#2D2D2D",
+    fg="white",
+    activebackground="#3C3C3C",
+    activeforeground="white",
+    width=20
+)
+
+folder_btn.pack(pady=5)
+song_list.bind("<Double-Button-1>", lambda event: play_song())
+
 # Buttons Frame
 button_frame = tk.Frame(root, bg="#1E1E1E")
 button_frame.pack(pady=10)
