@@ -1,51 +1,33 @@
-# 🎵 Python Music Player
+# Python Music Player
 
-A modern desktop music player built with **Python**, **Tkinter**, and **Pygame**. The application provides a clean graphical interface for playing MP3 files with playlist management, playback controls, song search, shuffle functionality, and dynamic folder selection.
+A desktop music player developed using **Python**, **Tkinter**, and **Pygame**. The application provides a simple graphical interface for playing MP3 files, managing playlists, and controlling audio playback.
 
----
+## Overview
 
-## Preview
-
-The application includes:
-
-* Dark-themed graphical user interface
-* Interactive playlist
-* Playback controls
-* Search functionality
-* Folder selection
-* Volume control
-* Shuffle playback
-
----
+This project was created to explore desktop application development in Python by combining graphical user interfaces with multimedia programming. The application automatically loads MP3 files from a selected folder and provides essential playback controls through an intuitive interface.
 
 ## Features
 
-* 🎵 Play MP3 audio files
-* ⏸ Pause and resume playback
-* ⏹ Stop the current song
-* ⏭ Play the next track
-* ⏮ Play the previous track
-* 🔀 Shuffle playlist
-* 🔍 Search songs in real time
-* 📂 Open any music folder
-* 🎚 Adjustable volume slider
-* 🎼 Display currently playing song
-* 📋 Automatic playlist generation
-* 📊 Total song counter
-* 🖱 Double-click a song to play
-* 🌙 Dark mode user interface
+* Graphical user interface built with Tkinter
+* Automatic detection of MP3 files
+* Play, Pause, Resume, and Stop playback
+* Previous and Next track navigation
+* Shuffle playback
+* Search songs in real time
+* Open any local music folder
+* Volume control with slider
+* Display currently playing track
+* Display total number of songs
+* Double-click a song to start playback
+* Dark-themed user interface
 
----
-
-## Technologies Used
+## Technologies
 
 * Python 3
 * Tkinter
 * Pygame
 * OS Module
 * Random Module
-
----
 
 ## Project Structure
 
@@ -63,8 +45,6 @@ python-music-player/
 └── .gitignore
 ```
 
----
-
 ## Installation
 
 Clone the repository:
@@ -73,7 +53,7 @@ Clone the repository:
 git clone https://github.com/knoxx99/python-music-player.git
 ```
 
-Navigate to the project directory:
+Move into the project directory:
 
 ```bash
 cd python-music-player
@@ -91,89 +71,61 @@ Run the application:
 python gui_player.py
 ```
 
----
+## Usage
 
-## User Interface
+1. Launch the application.
+2. Select a song from the playlist or open another folder containing MP3 files.
+3. Double-click a song or press **Play**.
+4. Use the playback controls to navigate through the playlist.
+5. Search songs using the search box.
+6. Adjust the volume using the slider.
 
-The application provides a desktop interface with:
+## Implemented Features
 
-* Current song display
-* Search bar
-* Playlist
-* Playback controls
-* Shuffle button
-* Folder selection
-* Volume slider
+| Feature               | Status |
+| --------------------- | :----: |
+| GUI Interface         |    ✅   |
+| MP3 Playback          |    ✅   |
+| Playlist              |    ✅   |
+| Play / Pause / Resume |    ✅   |
+| Stop Playback         |    ✅   |
+| Previous / Next Track |    ✅   |
+| Shuffle               |    ✅   |
+| Search Songs          |    ✅   |
+| Open Folder           |    ✅   |
+| Volume Control        |    ✅   |
+| Current Song Display  |    ✅   |
+| Double-Click Playback |    ✅   |
+| Dark Theme            |    ✅   |
 
----
-
-## Available Controls
-
-| Control        | Description                |
-| -------------- | -------------------------- |
-| ▶ Play         | Play selected song         |
-| ⏸ Pause        | Pause playback             |
-| ▶ Resume       | Resume playback            |
-| ⏹ Stop         | Stop playback              |
-| ⏮ Previous     | Play previous song         |
-| ⏭ Next         | Play next song             |
-| 🔀 Shuffle     | Play a random song         |
-| 🔍 Search      | Filter songs while typing  |
-| 📂 Open Folder | Load songs from any folder |
-| Volume Slider  | Adjust playback volume     |
-
----
-
-## Current Features
-
-* GUI-based music player
-* Automatic MP3 detection
-* Dynamic playlist
-* Real-time search
-* Folder selection
-* Shuffle playback
-* Playlist navigation
-* Dark theme
-* Double-click playback
-* Volume adjustment
-
----
-
-## Planned Features
+## Future Improvements
 
 * Playback progress bar
 * Song duration display
-* Album artwork
 * Repeat mode
 * Favorites playlist
-* Music metadata (Artist, Album)
+* Album artwork
+* Music metadata (Artist, Album, Duration)
 * Keyboard shortcuts
-* Playlist export/import
-* Recently played songs
-* Equalizer
+* Playlist import/export
+* Recently played history
 
----
+## Learning Outcomes
 
-## Learning Objectives
-
-This project demonstrates practical knowledge of:
+This project helped strengthen practical knowledge of:
 
 * Python programming
-* GUI development with Tkinter
-* Audio playback using Pygame
+* Tkinter GUI development
+* Audio playback with Pygame
 * Event-driven programming
-* File system operations
-* Desktop application design
-* User interface development
+* File handling
+* Desktop application development
+* User interface design
 
----
+## Author
 
-## Contributing
-
-Contributions, suggestions, and improvements are welcome. Feel free to fork the repository, create a feature branch, and submit a pull request.
-
----
+**Kaustubh Gedam**
 
 ## License
 
-This project is available for educational and learning purposes.
+This project is open for educational and learning purposes.
