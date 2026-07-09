@@ -12,8 +12,7 @@ root = tk.Tk()
 root.title("🎵 Python Music Player")
 root.geometry("1000x700")
 root.configure(bg="#1E1E1E")
-root.resizable(False, False)
-
+root.resizable(True, True)
 # Current song label
 current_song = tk.StringVar()
 current_song.set("🎵 No song selected")
